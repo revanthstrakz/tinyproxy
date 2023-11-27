@@ -1,0 +1,42 @@
+# fly.toml app configuration file generated for squidproxytokyo on 2023-10-05T06:39:34+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "squidproxytokyo"
+primary_region = "nrt"
+
+[experimental]
+  auto_rollback = true
+
+[build]
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 8888
+
+  [[services.ports]]
+    port = 8888
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 2000
+    soft_limit = 2000
+
+[[services]]
+  protocol = "udp"
+  internal_port = 8888
+
+  [[services.ports]]
+    port = 8888
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 2000
+    soft_limit = 2000
+
+[checks]
+  [checks.proxyport]
+    port = 8888
+    type = "tcp"
+    interval = "15s"
+    timeout = "10s"
+    grace_period = "30s"
