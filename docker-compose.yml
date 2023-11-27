@@ -1,0 +1,8 @@
+version: '3'
+services:
+  tiny_proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8888:8888
